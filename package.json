@@ -1,7 +1,8 @@
 {
   "name": "@cusc/cusc-custom-brand",
-  "version": "1.0.0-semantically-released",
-  "description": "The default branding and SASS theme package containing for Open edX applications. This package is designed to be copied and customized.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "CUSC brand for Open edX MFE",
   "scripts": {
     "build-tokens": "paragon build-tokens --source ./paragon/tokens/ --build-dir ./paragon/build -t light",
     "build-scss": "paragon build-scss --corePath ./paragon/core.scss --themesPath ./paragon/build/themes --source",
@@ -9,18 +10,9 @@
     "build:watch": "nodemon --ignore dist -x \"make build\"",
     "paragon:help": "paragon help"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/openedx/brand-openedx.git"
-  },
-  "author": "Open edX Community",
-  "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/openedx/brand-openedx/issues"
-  },
-  "homepage": "https://github.com/openedx/brand-openedx#readme",
-  "publishConfig": {
-    "access": "public"
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
   },
   "devDependencies": {
     "@openedx/paragon": "^23.0.0",
