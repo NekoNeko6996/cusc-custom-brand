@@ -1,6 +1,6 @@
 {
   "name": "@nekoneko6996/cusc-custom-brand",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "repository": "https://github.com/nekoneko6996/cusc-custom-brand",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
