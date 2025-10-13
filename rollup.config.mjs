@@ -16,7 +16,7 @@ export default {
     'react-responsive',
     '@openedx/paragon',
     '@edx/frontend-platform',
-    '@edx/frontend-platform/react',
+    '@edx/frontend-platform/react/index.js',
   ],
   plugins: [
     nodeResolve({ extensions: ['.js', '.jsx'] }),
