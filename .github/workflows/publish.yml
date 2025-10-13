@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com
-          scope: '@NekoNeko6996'
+          scope: '@nekoneko6996'
       - run: npm ci
       - run: npm run build
       - run: npm publish
