@@ -1,8 +1,8 @@
 export { primaryNav, secondaryNav } from './navigation.js';
 export { footerLinks } from './footers.js';
 
-export { default as Header } from './components/CustomHeader.js';
-export { default as Footer } from './components/CustomFooter.js';
+export { default as CustomHeader } from './components/CustomHeader.jsx';
+export { default as CustomFooter } from './components/CustomFooter.jsx';
 
 // Kèm export đường dẫn SCSS để MFE có thể `import '@edx/brand/paragon/build/scss/core.scss'` như cũ
 export { default as tutorLogo } from './assets/tutor-logo.png';
