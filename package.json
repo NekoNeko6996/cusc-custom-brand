@@ -24,8 +24,7 @@
     "react-dom": ">=17",
     "react-responsive": ">=9",
     "@openedx/paragon": ">=21",
-    "@edx/frontend-platform": ">=5",
-    "@edx/frontend-platform/react": ">=5"
+    "@edx/frontend-platform": ">=5"
   },
   "sideEffects": [
     "**/*.scss",
