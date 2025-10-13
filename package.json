@@ -1,8 +1,10 @@
 {
   "name": "@nekoneko6996/cusc-custom-brand",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "https://github.com/nekoneko6996/cusc-custom-brand",
-  "publishConfig": { "registry": "https://npm.pkg.github.com" },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "license": "MIT",
   "type": "module",
   "main": "dist/index.cjs",
@@ -14,7 +16,9 @@
     },
     "./scss": "./dist/scss/index.css"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "react": ">=17",
     "react-dom": ">=17",
@@ -23,7 +27,10 @@
     "@edx/frontend-platform": ">=5",
     "@edx/frontend-platform/react": ">=5"
   },
-  "sideEffects": ["**/*.scss", "**/*.css"],
+  "sideEffects": [
+    "**/*.scss",
+    "**/*.css"
+  ],
   "scripts": {
     "build": "rimraf dist && rollup -c"
   }
