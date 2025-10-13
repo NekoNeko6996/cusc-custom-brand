@@ -1,21 +1,28 @@
 {
   "name": "@cusc/cusc-custom-brand",
   "version": "1.0.0",
-  "main": "index.js",
-  "description": "CUSC brand for Open edX MFE",
-  "scripts": {
-    "build-tokens": "paragon build-tokens --source ./paragon/tokens/ --build-dir ./paragon/build -t light",
-    "build-scss": "paragon build-scss --corePath ./paragon/core.scss --themesPath ./paragon/build/themes --source",
-    "build": "make build",
-    "build:watch": "nodemon --ignore dist -x \"make build\"",
-    "paragon:help": "paragon help"
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./scss": "./dist/scss/index.css"
   },
+  "files": ["dist"],
   "peerDependencies": {
     "react": ">=17",
-    "react-dom": ">=17"
+    "react-dom": ">=17",
+    "react-responsive": ">=9",
+    "@openedx/paragon": ">=21",
+    "@edx/frontend-platform": ">=5",
+    "@edx/frontend-platform/react": ">=5"
   },
-  "devDependencies": {
-    "@openedx/paragon": "^23.0.0",
-    "nodemon": "^3.1.10"
+  "sideEffects": ["**/*.scss", "**/*.css"],
+  "scripts": {
+    "build": "rimraf dist && rollup -c"
   }
 }
