@@ -1,6 +1,8 @@
 {
-  "name": "@cusc/cusc-custom-brand",
+  "name": "@nekoneko6996/cusc-custom-brand",
   "version": "1.0.0",
+  "repository": "https://github.com/nekoneko6996/cusc-custom-brand",
+  "publishConfig": { "registry": "https://npm.pkg.github.com" },
   "license": "MIT",
   "type": "module",
   "main": "dist/index.cjs",
