@@ -42,7 +42,7 @@
     "@babel/preset-react": "^7.24.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-responsive": "9.0.2",
+    "react-responsive": ">=8 <11",
     "@openedx/paragon": "23.14.8"
   },
   "scripts": {
