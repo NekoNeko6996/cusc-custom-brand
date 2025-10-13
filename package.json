@@ -22,7 +22,7 @@
   "peerDependencies": {
     "react": ">=17",
     "react-dom": ">=17",
-    "react-responsive": ">=9",
+    "react-responsive": ">=8 <11",
     "@openedx/paragon": ">=21",
     "@edx/frontend-platform": ">=5"
   },
