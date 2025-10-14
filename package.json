@@ -1,52 +1,35 @@
 {
   "name": "@nekoneko6996/cusc-custom-brand",
-  "version": "1.0.16",
-  "repository": "https://github.com/nekoneko6996/cusc-custom-brand",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
+  "version": "1.0.0",
+  "description": "CUSC custom brand components (Header/Footer) for Open edX MFEs",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./scss": "./dist/scss/index.css"
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
   },
-  "files": [
-    "dist"
-  ],
-  "peerDependencies": {
-    "react": ">=17",
-    "react-dom": ">=17",
-    "react-responsive": ">=8 <11",
-    "@openedx/paragon": ">=21",
-    "@edx/frontend-platform": ">=5"
-  },
-  "sideEffects": [
-    "**/*.scss",
-    "**/*.css"
-  ],
-  "devDependencies": {
-    "rimraf": "^6.0.1",
-    "rollup": "^4.22.5",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-commonjs": "^25.0.8",
-    "@rollup/plugin-url": "^8.0.2",
-    "rollup-plugin-postcss": "^4.0.2",
-    "@babel/core": "^7.25.0",
-    "@babel/preset-react": "^7.24.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-responsive": ">=8 <11",
-    "@openedx/paragon": "23.14.8"
-  },
+  "files": ["dist"],
+  "sideEffects": false,
   "scripts": {
-    "build": "rimraf dist && rollup -c",
-    "prepublishOnly": "npm run build"
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "prepare": "npm run build",
+    "release": "npm publish --access public"
+  },
+  "peerDependencies": {
+    "react": ">=17 <19",
+    "react-dom": ">=17 <19",
+    "@openedx/paragon": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "tsup": "^8.3.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0"
   }
 }
