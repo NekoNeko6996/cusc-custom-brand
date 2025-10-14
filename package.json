@@ -1,15 +1,20 @@
 {
   "name": "@nekoneko6996/cusc-custom-brand",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "CUSC custom brand components (Header/Footer) for Open edX MFEs",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "exports": {
-    ".": { "import": "./dist/index.js", "require": "./dist/index.cjs" }
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup src/index.js --format esm,cjs --clean --external react,react-dom,@openedx/paragon,react-responsive,@edx/frontend-platform,@edx/frontend-platform/react",
@@ -26,11 +31,15 @@
   "devDependencies": {
     "tsup": "^8.5.0"
   },
-  "publishConfig": { "registry": "https://registry.npmjs.org" },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/NekoNeko6996/cusc-custom-brand"
   },
-  "bugs": { "url": "https://github.com/NekoNeko6996/cusc-custom-brand/issues" },
+  "bugs": {
+    "url": "https://github.com/NekoNeko6996/cusc-custom-brand/issues"
+  },
   "homepage": "https://github.com/NekoNeko6996/cusc-custom-brand#readme"
 }
