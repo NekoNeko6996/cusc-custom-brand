@@ -1,7 +1,7 @@
 // src/components/CustomHeader.jsx
 import React, { useContext, useMemo, useState } from 'react';
 import Responsive from 'react-responsive';
-import { AppContext } from '@edx/frontend-platform/react/index.js';
+import { AppContext } from '@edx/frontend-platform';
 import { ensureConfig, getConfig } from '@edx/frontend-platform';
 import {
   Navbar, NavbarBrand, Nav, NavItem, NavLink,
