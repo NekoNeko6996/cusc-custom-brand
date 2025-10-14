@@ -1,6 +1,6 @@
 {
   "name": "@nekoneko6996/cusc-custom-brand",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CUSC custom brand components (Header/Footer) for Open edX MFEs",
   "license": "MIT",
   "type": "module",
@@ -14,7 +14,9 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean",
