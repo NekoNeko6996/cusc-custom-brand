@@ -1,6 +1,6 @@
 {
   "name": "@nekoneko6996/cusc-custom-brand",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "CUSC custom brand components (Header/Footer) for Open edX MFEs",
   "license": "MIT",
   "type": "module",
@@ -31,5 +31,7 @@
   "devDependencies": {
     "tsup": "^8.3.0"
   },
-  "publishConfig": { "registry": "https://registry.npmjs.org" }
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  }
 }
