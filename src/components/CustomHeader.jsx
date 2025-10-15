@@ -119,7 +119,7 @@ export default function CustomHeader({
                 <span className="d-inline-flex align-items-center">
                   {authenticatedUser.avatar
                     ? <img src={authenticatedUser.avatar} alt="avatar" width={28} height={28} style={{ borderRadius: 999 }} />
-                    : <Icon src={Person} />
+                    : <Icon src={Person.default} />
                   }
                   <span className="ms-2">{authenticatedUser.username}</span>
                 </span>
@@ -153,7 +153,7 @@ export default function CustomHeader({
         {Brand}
         {!minimal && (
           <IconButton aria-label="Open menu" onClick={() => setMobileOpen((v) => !v)}>
-            <Icon src={MenuIcon} />
+            <Icon src={MenuIcon.default} />
           </IconButton>
         )}
       </Container>
