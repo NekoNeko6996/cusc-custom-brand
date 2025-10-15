@@ -27,7 +27,11 @@ function MainMenu({ items }) {
       {items.map((item) => {
         if (item.type === 'menu' && Array.isArray(item.items)) {
           return (
-            <NavDropdown key={item.content} title={item.content}>
+            <NavDropdown 
+              id={`main-menu-dropdown-${item.content.toLowerCase()}`}
+              key={item.content} 
+              title={item.content}
+              >
               {item.items.map((sub) => (
                 <NavDropdown.Item key={sub.href} as="a" href={sub.href}>
                   {sub.content}
@@ -114,6 +118,7 @@ export default function CustomHeader({
 
           {authenticatedUser ? (
             <NavDropdown
+              id="user-menu-dropdown"
               align="end"
               title={
                 <span className="d-inline-flex align-items-center">

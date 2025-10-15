@@ -22,11 +22,11 @@
     "release": "npm publish --access public"
   },
   "peerDependencies": {
+    "@edx/frontend-platform": ">=6",
+    "@openedx/paragon": ">=20",
     "react": ">=17 <19",
     "react-dom": ">=17 <19",
-    "@openedx/paragon": ">=20",
-    "react-responsive": "^9",
-    "@edx/frontend-platform": ">=6"
+    "react-responsive": "^9"
   },
   "devDependencies": {
     "tsup": "^8.5.0"
@@ -41,5 +41,8 @@
   "bugs": {
     "url": "https://github.com/NekoNeko6996/cusc-custom-brand/issues"
   },
-  "homepage": "https://github.com/NekoNeko6996/cusc-custom-brand#readme"
+  "homepage": "https://github.com/NekoNeko6996/cusc-custom-brand#readme",
+  "dependencies": {
+    "@nekoneko6996/cusc-custom-brand": "^1.0.25"
+  }
 }
