@@ -9,8 +9,8 @@ import {
   NavDropdown, Container, IconButton, Icon,
 } from '@openedx/paragon';
 //
-import Person from '@openedx/paragon/icons/dist/Person';
-import MenuIcon from '@openedx/paragon/icons/dist/Menu';
+import Person from '@openedx/paragon/icons/es5/Person.js';
+import MenuIcon from '@openedx/paragon/icons/es5/MenuIcon.js';
 
 // dữ liệu mặc định từ brand (có thể override bằng props)
 import { primaryNav as defaultPrimary, secondaryNav as defaultSecondary, ctuLogo as defaultLogo } from '../brand';
