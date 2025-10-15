@@ -60,6 +60,15 @@ export default function CustomHeader({
   secondaryNav,
   logo,
 }) {
+
+  // --- THÊM VÀO ĐÂY ---
+  console.log('--- DEBUGGING CustomHeader ---');
+  console.log('typeof Person:', typeof Person);
+  console.log('Value of Person:', Person);
+  console.log('typeof MenuIcon:', typeof MenuIcon);
+  console.log('Value of MenuIcon:', MenuIcon);
+  // ---------------------
+
   const { authenticatedUser, config } = useContext(AppContext);
   const [mobileOpen, setMobileOpen] = useState(false);
   const minimal = getConfig().AUTHN_MINIMAL_HEADER;
