@@ -3,10 +3,12 @@ import React, { useContext, useMemo, useState } from 'react';
 import Responsive from 'react-responsive';
 import { AppContext } from '@edx/frontend-platform/react/index.js';
 import { ensureConfig, getConfig } from '@edx/frontend-platform';
+
 import {
   Navbar, NavbarBrand, Nav, NavItem, NavLink,
   NavDropdown, Container, IconButton, Icon,
 } from '@openedx/paragon';
+import { Person, Menu as MenuIcon } from '@openedx/paragon/icons'; // <-- ADD THIS LINE
 
 // dữ liệu mặc định từ brand (có thể override bằng props)
 import { primaryNav as defaultPrimary, secondaryNav as defaultSecondary, ctuLogo as defaultLogo } from '../brand';
@@ -115,7 +117,7 @@ export default function CustomHeader({
                 <span className="d-inline-flex align-items-center">
                   {authenticatedUser.avatar
                     ? <img src={authenticatedUser.avatar} alt="avatar" width={28} height={28} style={{ borderRadius: 999 }} />
-                    : <Icon src="user" />
+                    : <Icon src={Person} />
                   }
                   <span className="ms-2">{authenticatedUser.username}</span>
                 </span>
@@ -149,7 +151,7 @@ export default function CustomHeader({
         {Brand}
         {!minimal && (
           <IconButton aria-label="Open menu" onClick={() => setMobileOpen((v) => !v)}>
-            <Icon src="menu" />
+            <Icon src={MenuIcon} />
           </IconButton>
         )}
       </Container>
