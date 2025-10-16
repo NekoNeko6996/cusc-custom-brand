@@ -1,5 +1,5 @@
 // src/components/CustomHeader.jsx
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { AppContext } from '@edx/frontend-platform/react/index.js';
 import { ensureConfig, getConfig } from '@edx/frontend-platform';
