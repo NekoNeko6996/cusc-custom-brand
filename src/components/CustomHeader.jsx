@@ -133,7 +133,7 @@ header.global-header.custom-header .has-dropdown .dropdown{
   display:none; position:absolute; top:calc(100% + 6px); left:0;
   min-width:220px; background:#fff; border:1px solid var(--line);
   border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.08); padding:.5rem; z-index:2000;
-  list-style:none;
+  list-style-type:none;
 }
 header.global-header.custom-header .has-dropdown.open .dropdown{ display:block; }
 
@@ -151,6 +151,7 @@ header.global-header.custom-header .user-area .dropdown{
   display:none; position:absolute; right:0; top:calc(100% + 8px);
   min-width:220px; background:#fff; border:1px solid var(--line);
   border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.08); padding:.5rem; z-index:2000;
+  list-style-type:none;
 }
 header.global-header.custom-header .user-area .dropdown.show{ display:block; }
 
@@ -248,6 +249,25 @@ function InlineIcon({ name, size = 20 }) {
 }
 function classNames(...xs) { return xs.filter(Boolean).join(' '); }
 
+function AvatarOrIcon({ src, size = 28, alt = 'User avatar' }) {
+  const [err, setErr] = React.useState(false);
+  const showImg = !!src && !err;
+
+  if (showImg) {
+    return (
+      <img
+        src={src}
+        alt={alt}
+        width={size}
+        height={size}
+        style={{ borderRadius: 999, objectFit: 'cover' }}
+        onError={() => setErr(true)}
+      />
+    );
+  }
+  return <InlineIcon name="person" size={size} />;
+}
+
 function MainMenu({ items }) {
   const [openKey, setOpenKey] = useState(null);
   return (
@@ -294,7 +314,7 @@ function MainMenu({ items }) {
   );
 }
 
-export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
+export default function CustomHeader({ primaryNav, secondaryNav, logo, userImageUrl }) {
   const { authenticatedUser, config } = useContext(AppContext);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
@@ -356,6 +376,16 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
 
   function UserArea() {
     if (authenticatedUser) {
+      const avatarSrc =
+        userImageUrl ||
+        authenticatedUser?.avatar ||
+        authenticatedUser?.profile_image?.image_url_large ||
+        authenticatedUser?.profile_image?.image_url_medium ||
+        authenticatedUser?.profile_image?.image_url_small ||
+        authenticatedUser?.profileImageUrl ||
+        authenticatedUser?.image_url;
+
+      const displayName = authenticatedUser?.name || authenticatedUser?.username || 'User';
       return (
         <div className="user-area">
           <button
@@ -364,15 +394,15 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
             onClick={() => setUserOpen((v) => !v)}
             aria-haspopup="true"
             aria-expanded={userOpen}
-            onBlur={(e) => { if (!e.currentTarget.closest('.user-area').contains(e.relatedTarget)) setUserOpen(false); }}
+            onBlur={(e) => {
+              if (!e.currentTarget.closest('.user-area').contains(e.relatedTarget)) setUserOpen(false);
+            }}
           >
-            {authenticatedUser.avatar
-              ? <img src={authenticatedUser.avatar} alt="avatar" width={28} height={28} style={{ borderRadius: 999 }} />
-              : <InlineIcon name="person" />
-            }
-            <span className="ms-2">{authenticatedUser.username}</span>
+            <AvatarOrIcon src={avatarSrc} size={28} alt={displayName} />
+            <span className="ms-2">{displayName}</span>
             <InlineIcon name="chevron" size={18} />
           </button>
+
           <ul className={classNames('dropdown', userOpen && 'show')} role="menu">
             {userMenu.map((i) => (
               <li key={i.href} role="none">
@@ -384,10 +414,13 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
       );
     }
     if (minimal) return null;
+
     return (
       <div className="auth-buttons d-flex gap-2">
         {loggedOut.map((i) => (
-          <a key={i.href} className="btn btn-sm btn-outline-primary" href={i.href}>{i.label}</a>
+          <a key={i.href} className="btn btn-sm btn-outline-primary" href={i.href}>
+            {i.label}
+          </a>
         ))}
       </div>
     );
