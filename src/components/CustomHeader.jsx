@@ -4,7 +4,6 @@ import { useMediaQuery } from 'react-responsive';
 import { AppContext } from '@edx/frontend-platform/react/index.js';
 import { ensureConfig, getConfig } from '@edx/frontend-platform';
 
-// Dữ liệu mặc định từ brand (có thể override bằng props)
 import {
   primaryNav as defaultPrimary,
   secondaryNav as defaultSecondary,
@@ -15,6 +14,10 @@ ensureConfig(
   ['LMS_BASE_URL','LOGIN_URL','LOGOUT_URL','SITE_NAME','ACCOUNT_PROFILE_URL','ACCOUNT_SETTINGS_URL','ORDER_HISTORY_URL'],
   'CustomHeader',
 );
+
+/* ========= HEIGHT constants để offset body ========= */
+const H_DESKTOP = 64; // chiều cao thực tế thanh header desktop
+const H_MOBILE  = 56; // chiều cao thực tế thanh header mobile
 
 /* ========= BIẾN THEME (chỉnh ở đây) ========= */
 const THEME_CSS_VARS = `
@@ -34,7 +37,6 @@ const THEME_CSS_VARS = `
   --dark-theme-switch-bg-color:#1f2937;
   --light-theme-switch-bg-color:#e5e7eb;
 
-  /* Tokens cho header */
   --cusc-blue:#0056A1;
   --cusc-blue-hover:#0F59C9;
   --accent:#10B981;
@@ -57,10 +59,13 @@ const THEME_CSS_VARS = `
    CUSC Header (lean & same UI)
    ========================= */
 const HEADER_CSS = `
-/* Độ ưu tiên cao: target đúng header cũ của edX + thêm !important ở nơi cần thiết */
+/* Ẩn header legacy của edX nếu còn trong DOM (để tránh đè UI) */
+header.global-header:not(.custom-header){ display:none !important; }
+
+/* Shell */
 header.global-header.custom-header{
   position:fixed !important;
-  top:0; left:0; right:0; z-index:1000;
+  top:0; left:0; right:0; z-index:1100; /* tăng z-index để hơn các overlay khác */
   background:#fff !important;
   border-bottom:0 !important;
   box-shadow:0 6px 20px rgba(0,0,0,.03) !important;
@@ -68,7 +73,6 @@ header.global-header.custom-header{
   -webkit-backdrop-filter:none !important;
   transition:background .25s ease, backdrop-filter .25s ease, box-shadow .25s ease;
 }
-
 header.global-header.custom-header.scrolled{
   background:rgba(255,255,255,0.72) !important;
   backdrop-filter:saturate(160%) blur(12px) !important;
@@ -82,11 +86,9 @@ header.global-header.custom-header.scrolled::after{
 
 header.global-header.custom-header .header-container{ width:100% !important; max-width:none !important; padding:0 !important; margin:0 !important; }
 header.global-header.custom-header .bar{ max-width:1200px; margin:0 auto; padding:0 16px; }
-@media (max-width: 991.98px){
-  header.global-header.custom-header .bar{ padding:0 16px; }
-}
+@media (max-width: 991.98px){ header.global-header.custom-header .bar{ padding:0 16px; } }
 
-/* Flex utilities (scoped để không đè toàn site) */
+/* Utilities (scoped) */
 header.global-header.custom-header .d-flex{ display:flex !important; }
 header.global-header.custom-header .align-center{ align-items:center !important; }
 header.global-header.custom-header .justify-between{ justify-content:space-between !important; }
@@ -97,14 +99,16 @@ header.global-header.custom-header .mt-2{ margin-top:.5rem !important; }
 header.global-header.custom-header .mt-3{ margin-top:.75rem !important; }
 header.global-header.custom-header .fw-semibold{ font-weight:600 !important; }
 
-/* Thanh chính */
-header.global-header.custom-header .main-header,
+/* Thanh chính (auto height theo giá trị JavaScript ở spacer) */
 header.global-header.custom-header > .bar{
   display:flex !important; align-items:center !important; justify-content:space-between !important;
-  min-height:60px !important; height:60px !important; gap:var(--gap) !important;
+  min-height:${H_DESKTOP}px !important;
+}
+@media (max-width:991px){
+  header.global-header.custom-header > .bar{ min-height:${H_MOBILE}px !important; }
 }
 
-/* Logo + Brand */
+/* Brand */
 header.global-header.custom-header .brand{ display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; color:inherit; }
 header.global-header.custom-header .brand-title{ font-weight:800; color:var(--cusc-blue); letter-spacing:.2px; }
 header.global-header.custom-header .brand:hover .brand-title{ color:var(--cusc-blue-hover); }
@@ -123,14 +127,16 @@ header.global-header.custom-header .nav-link.active{
   color:var(--dark) !important; border-bottom-color:var(--primary) !important;
 }
 
-/* Dropdown */
+/* Dropdown desktop */
 header.global-header.custom-header .btn-reset{ background:none; border:0; padding:0; cursor:pointer; }
 header.global-header.custom-header .has-dropdown .dropdown{
   display:none; position:absolute; top:calc(100% + 6px); left:0;
   min-width:220px; background:#fff; border:1px solid var(--line);
-  border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.08); padding:.5rem; z-index:50;
+  border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.08); padding:.5rem; z-index:2000;
 }
 header.global-header.custom-header .has-dropdown.open .dropdown{ display:block; }
+
+/* Dropdown item */
 header.global-header.custom-header .dropdown-item{ display:block; padding:.5rem .75rem; border-radius:6px; color:inherit; text-decoration:none; }
 header.global-header.custom-header .dropdown-item:hover{ background:#f3f4f6; }
 
@@ -138,12 +144,12 @@ header.global-header.custom-header .dropdown-item:hover{ background:#f3f4f6; }
 header.global-header.custom-header .secondary-nav .nav-list{ gap:12px; }
 header.global-header.custom-header .secondary-nav .nav-link{ padding:10px 0 !important; }
 
-/* User area */
+/* User dropdown (desktop) */
 header.global-header.custom-header .user-area{ position:relative; }
 header.global-header.custom-header .user-area .dropdown{
   display:none; position:absolute; right:0; top:calc(100% + 8px);
   min-width:220px; background:#fff; border:1px solid var(--line);
-  border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.08); padding:.5rem;
+  border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,.08); padding:.5rem; z-index:2000;
 }
 header.global-header.custom-header .user-area .dropdown.show{ display:block; }
 
@@ -156,12 +162,12 @@ header.global-header.custom-header .btn-outline-primary{ color:#0d6efd; border-c
 header.global-header.custom-header .btn-outline-primary:hover{ background:#0d6efd; color:#fff; }
 header.global-header.custom-header .btn-light{ background:#f8fafc; border-color:#e5e7eb; }
 
-/* Mobile menu list */
+/* Mobile list */
 header.global-header.custom-header .mobile-list{ list-style:none; padding:0; margin:0; }
 header.global-header.custom-header .mobile-link{ display:block; padding:.625rem .75rem; border-radius:8px; text-decoration:none; color:inherit; }
 header.global-header.custom-header .mobile-link:hover{ background:#f3f4f6; }
 
-/* Discover (underline gradient – giống hình 2/3) */
+/* Discover underline gradient */
 header.global-header.custom-header .nav-link.nav-discover{ position:relative; font-weight:600; color:var(--txt) !important; }
 header.global-header.custom-header .nav-link.nav-discover::after{
   content:""; position:absolute; left:50%; bottom:-4px; height:2px; width:100%;
@@ -174,8 +180,8 @@ header.global-header.custom-header .nav-link.nav-discover.active::after{
   opacity:1; transform:translateX(-50%) scaleX(1);
 }
 
-/* Dark theme hooks (giữ nguyên nếu site có body.indigo-dark-theme) */
-body.indigo-dark-theme header.global-header.custom-header{ background:var(--body-bg-d) !important; box-shadow:0px 1px 2px rgba(255,255,255,.8), 0px 1px 3px rgba(255,255,255,.1) !important; }
+/* Dark theme */
+body.indigo-dark-theme header.global-header.custom-header{ background:var(--body-bg-d) !important; box-shadow:0px 1px 2px rgba(255,255,255,.8), 0 1px 3px rgba(255,255,255,.1) !important; }
 body.indigo-dark-theme header.global-header.custom-header .nav-link{ color:var(--text-color-d) !important; }
 body.indigo-dark-theme header.global-header.custom-header .nav-link:hover{ border-bottom-color:var(--text-color-d) !important; }
 body.indigo-dark-theme header.global-header.custom-header .dropdown,
@@ -185,13 +191,28 @@ body.indigo-dark-theme header.global-header.custom-header .user-area .dropdown{
 body.indigo-dark-theme header.global-header.custom-header .dropdown-item{ color:var(--text-color-primary); }
 body.indigo-dark-theme header.global-header.custom-header .dropdown-item:hover{ background:var(--body-bg-d); color:var(--text-color-d); }
 
-/* Mobile: bỏ khoảng Discover ở màn nhỏ */
+/* MOBILE FIXES */
 @media (max-width:991px){
   header.global-header.custom-header .main-nav{ margin-left:0 !important; }
 }
+/* Dropdown thành panel cố định ở mobile nhỏ để không bị cắt và canh về bên phải */
+@media (max-width:575.98px){
+  header.global-header.custom-header .has-dropdown .dropdown,
+  header.global-header.custom-header .user-area .dropdown{
+    position:fixed !important;
+    top: calc(${H_MOBILE}px + 8px) !important; /* nằm dưới header */
+    right: 8px !important;
+    left: auto !important;
+    width: calc(100vw - 16px) !important;
+    max-height: 70vh !important;
+    overflow:auto !important;
+    z-index: 2200 !important;
+  }
+}
 `;
 
-/* ==== Utils ==== */
+
+/* ===== utils, menus, component … y như bạn đang dùng (không đổi) ===== */
 function InlineIcon({ name, size = 20 }) {
   const common = { width: size, height: size, viewBox: '0 0 24 24', 'aria-hidden': true };
   if (name === 'person') return (<svg {...common}><path fill="currentColor" d="M12 12a5 5 0 1 0-5-5a5 5 0 0 0 5 5m0 2c-3.33 0-10 1.34-10 4v2h20v-2c0-2.66-6.67-4-10-4"/></svg>);
@@ -233,7 +254,6 @@ function MainMenu({ items }) {
               </li>
             );
           }
-          // Thêm class 'nav-discover' nếu label chứa 'Discover'
           const isDiscover = (item.content || item.label || '').toLowerCase().includes('discover');
           return (
             <li key={item.href} className="nav-item">
@@ -339,7 +359,7 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
 
   const Desktop = () => (
     <header className="custom-header global-header">
-      <div className="bar" style={{ minHeight: 64 }}>
+      <div className="bar">
         <div className="d-flex align-center">
           {Brand}
           {!minimal && <MainMenu items={brandMain} />}
@@ -354,7 +374,7 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
 
   const Mobile = () => (
     <header className="custom-header global-header">
-      <div className="bar d-flex align-center justify-between" style={{ minHeight: 56 }}>
+      <div className="bar d-flex align-center justify-between">
         {Brand}
         {!minimal && (
           <button
@@ -409,11 +429,17 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
 
   return (
     <>
-      {/* CSS inline: biến + style (ưu tiên cao hơn vì được load sau) */}
+      {/* CSS inline: biến + style */}
       <style>{THEME_CSS_VARS + HEADER_CSS}</style>
 
-      {isMobile && <Mobile />}
-      {isDesktop && <Desktop />}
+      {isMobile ? <Mobile /> : <Desktop />}
+
+      {/* Spacer đẩy nội dung xuống, tránh header đè body */}
+      <div
+        className="cusc-header-offset"
+        aria-hidden="true"
+        style={{ height: isDesktop ? H_DESKTOP : H_MOBILE }}
+      />
     </>
   );
 }
