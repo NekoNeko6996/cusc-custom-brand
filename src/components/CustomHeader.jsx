@@ -1,6 +1,6 @@
 // src/components/CustomHeader.jsx
 import React, { useContext, useMemo, useState } from 'react';
-import Responsive from 'react-responsive';
+import { useMediaQuery } from 'react-responsive';
 import { AppContext } from '@edx/frontend-platform/react/index.js';
 import { ensureConfig, getConfig } from '@edx/frontend-platform';
 
@@ -120,6 +120,9 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
   const minimal = getConfig().AUTHN_MINIMAL_HEADER;
+
+  const isDesktop = useMediaQuery({ minWidth: 992 });
+  const isMobile = !isDesktop;
 
   const brandMain = useMemo(() => primaryNav ?? defaultPrimary ?? [], [primaryNav]);
   const brandSecond = useMemo(() => secondaryNav ?? defaultSecondary ?? [], [secondaryNav]);
@@ -317,8 +320,8 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
 
   return (
     <>
-      <Responsive maxWidth={991}><Mobile /></Responsive>
-      <Responsive minWidth={992}><Desktop /></Responsive>
+      {isMobile && <Mobile />}
+      {isDesktop && <Desktop />}
       <style>{`
         .custom-header .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
         .d-flex { display:flex; }
