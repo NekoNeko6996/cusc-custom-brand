@@ -85,7 +85,7 @@ header.global-header.custom-header.scrolled::after{
 }
 
 header.global-header.custom-header .header-container{ width:100% !important; max-width:none !important; padding:0 !important; margin:0 !important; }
-header.global-header.custom-header .bar{ max-width:1200px; margin:0 auto; padding:0 16px; }
+header.global-header.custom-header .bar{ padding:0 16px; }
 @media (max-width: 991.98px){ header.global-header.custom-header .bar{ padding:0 16px; } }
 
 /* Utilities (scoped) */
@@ -162,39 +162,64 @@ header.global-header.custom-header .btn-outline-primary{ color:#0d6efd; border-c
 header.global-header.custom-header .btn-outline-primary:hover{ background:#0d6efd; color:#fff; }
 header.global-header.custom-header .btn-light{ background:#f8fafc; border-color:#e5e7eb; }
 
-/* Mobile list */
-header.global-header.custom-header .mobile-list{ list-style:none; padding:0; margin:0; }
-header.global-header.custom-header .mobile-link{ display:block; padding:.625rem .75rem; border-radius:8px; text-decoration:none; color:inherit; }
-header.global-header.custom-header .mobile-link:hover{ background:#f3f4f6; }
+/* ===== MOBILE SHEET (đẹp hơn) ===== */
+/* Backdrop */
+.cusc-mobile-overlay{
+  position:fixed; inset:0; background:rgba(15,23,42,.35);
+  backdrop-filter:saturate(120%) blur(2px);
+  animation:cusc-fade-in .18s ease-out; z-index:2150;
+}
+/* Sheet trượt từ phải */
+.cusc-mobile-sheet{
+  position:fixed; right:0; top:${H_MOBILE}px; bottom:0; width:min(92vw, 360px);
+  background:#fff; border-left:1px solid #e5e7eb; box-shadow: -20px 0 40px rgba(0,0,0,.12);
+  border-top-left-radius:14px; z-index:2200; display:flex; flex-direction:column;
+  animation:cusc-slide-in .22s ease-out;
+}
+/* Header của sheet */
+.cusc-mobile-sheet .sheet-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 14px; border-bottom:1px solid #eef2f7;
+}
+.cusc-mobile-sheet .sheet-title{ font-weight:800; color:var(--cusc-blue); }
+.cusc-mobile-sheet .sheet-close{ background:none; border:0; padding:8px; border-radius:10px; }
+.cusc-mobile-sheet .sheet-close:active{ transform:scale(.98); }
+/* Nội dung */
+.cusc-mobile-sheet .sheet-body{ padding:10px; overflow:auto; }
+.cusc-mobile-sheet .group{ margin-top:10px; }
+.cusc-mobile-sheet .group-title{ font-size:.85rem; color:#64748b; padding:8px 10px; }
 
-/* Discover underline gradient */
-header.global-header.custom-header .nav-link.nav-discover{ position:relative; font-weight:600; color:var(--txt) !important; }
-header.global-header.custom-header .nav-link.nav-discover::after{
-  content:""; position:absolute; left:50%; bottom:-4px; height:2px; width:100%;
-  background:linear-gradient(90deg, var(--cusc-blue), var(--accent), var(--cusc-blue));
-  background-size:200% 100%; opacity:0; transform:translateX(-50%) scaleX(0);
-  transform-origin:center; transition:transform .3s ease, opacity .25s ease;
+/* Các link trong sheet */
+.cusc-mobile-sheet .m-item{
+  display:flex; align-items:center; gap:10px; padding:12px 12px; border-radius:10px;
+  text-decoration:none; color:#1f2937; border:1px solid transparent;
 }
-header.global-header.custom-header .nav-link.nav-discover:hover::after,
-header.global-header.custom-header .nav-link.nav-discover.active::after{
-  opacity:1; transform:translateX(-50%) scaleX(1);
+.cusc-mobile-sheet .m-item:hover{ background:#F3F6FB; border-color:#e5e7eb; }
+.cusc-mobile-sheet .m-item:active{ transform:translateY(1px); }
+.cusc-mobile-sheet .m-btn{
+  display:block; width:100%; text-align:center; padding:12px; border-radius:10px; text-decoration:none;
+  background:#F8FAFC; border:1px solid #e5e7eb; color:#0f172a;
+}
+.cusc-mobile-sheet .m-btn + .m-btn{ margin-top:8px; }
+
+/* Icon chung (mask SVG) */
+.cusc-ic{ width:18px; height:18px; background:currentColor; opacity:.9; }
+.cusc-ic.person{
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23000' d='M12 12a5 5 0 1 0-5-5a5 5 0 0 0 5 5m0 2c-3.33 0-10 1.34-10 4v2h20v-2c0-2.66-6.67-4-10-4'/></svg>") no-repeat center/contain;
+          mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23000' d='M12 12a5 5 0 1 0-5-5a5 5 0 0 0 5 5m0 2c-3.33 0-10 1.34-10 4v2h20v-2c0-2.66-6.67-4-10-4'/></svg>") no-repeat center/contain;
+}
+.cusc-ic.link{
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23000' d='M10.59 13.41a1 1 0 0 1 0-1.41l2-2a1 1 0 1 1 1.41 1.41l-2 2a1 1 0 0 1-1.41 0M13 7h5v5h-2V9.41l-7.29 7.3a1 1 0 0 1-1.42-1.42L14.59 8H13Z'/></svg>") no-repeat center/contain;
+          mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23000' d='M10.59 13.41a1 1 0 0 1 0-1.41l2-2a1 1 0 1 1 1.41 1.41l-2 2a1 1 0 0 1-1.41 0M13 7h5v5h-2V9.41l-7.29 7.3a1 1 0 0 1-1.42-1.42L14.59 8H13Z'/></svg>") no-repeat center/contain;
 }
 
-/* Dark theme */
-body.indigo-dark-theme header.global-header.custom-header{ background:var(--body-bg-d) !important; box-shadow:0px 1px 2px rgba(255,255,255,.8), 0 1px 3px rgba(255,255,255,.1) !important; }
-body.indigo-dark-theme header.global-header.custom-header .nav-link{ color:var(--text-color-d) !important; }
-body.indigo-dark-theme header.global-header.custom-header .nav-link:hover{ border-bottom-color:var(--text-color-d) !important; }
-body.indigo-dark-theme header.global-header.custom-header .dropdown,
-body.indigo-dark-theme header.global-header.custom-header .user-area .dropdown{
-  background:var(--light-overlay-d); box-shadow:0 0 0 1px rgba(255,255,255,.8), 0 4px 6px -2px rgba(255,255,255,.05), 0 10px 15px -3px rgba(255,255,255,.1);
-}
-body.indigo-dark-theme header.global-header.custom-header .dropdown-item{ color:var(--text-color-primary); }
-body.indigo-dark-theme header.global-header.custom-header .dropdown-item:hover{ background:var(--body-bg-d); color:var(--text-color-d); }
+/* Animation */
+@keyframes cusc-fade-in{ from{opacity:0} to{opacity:1} }
+@keyframes cusc-slide-in{ from{ transform:translateX(20px); opacity:.6 } to{ transform:translateX(0); opacity:1 } }
 
-/* MOBILE FIXES */
-@media (max-width:991px){
-  header.global-header.custom-header .main-nav{ margin-left:0 !important; }
-}
+/* Mobile: bỏ khoảng Discover */
+@media (max-width:991px){ header.global-header.custom-header .main-nav{ margin-left:0 !important; } }
+
 /* Dropdown thành panel cố định ở mobile nhỏ để không bị cắt và canh về bên phải */
 @media (max-width:575.98px){
   header.global-header.custom-header .has-dropdown .dropdown,
@@ -284,6 +309,16 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
     { href: config?.LOGIN_URL, label: 'Log in' },
     { href: `${config?.LMS_BASE_URL}/register`, label: 'Register' },
   ]), [config]);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      const onEsc = (e) => e.key === 'Escape' && setMobileOpen(false);
+      window.addEventListener('keydown', onEsc);
+      return () => { document.body.style.overflow = prev; window.removeEventListener('keydown', onEsc); };
+    }
+  }, [mobileOpen]);
 
   const userMenu = useMemo(() => {
     if (!authenticatedUser) return [];
@@ -380,49 +415,87 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
           <button
             type="button"
             className="btn-reset p-2"
-            aria-label="Open menu"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen((v) => !v)}
+            onClick={() => setMobileOpen(v => !v)}
           >
             <InlineIcon name="menu" />
           </button>
         )}
       </div>
+
+      {/* Slide-over menu */}
       {!minimal && mobileOpen && (
-        <div className="bar" style={{ paddingTop: 8, paddingBottom: 12 }}>
-          <nav aria-label="Mobile Main">
-            <ul className="mobile-list">
-              {brandMain.filter((i) => i.type !== 'menu').map((i) => (
-                <li key={i.href}><a className="mobile-link" href={i.href}>{i.content || i.label}</a></li>
+        <>
+          <div className="cusc-mobile-overlay" onClick={() => setMobileOpen(false)} />
+
+          <aside className="cusc-mobile-sheet" role="dialog" aria-modal="true" aria-label="Main menu">
+            <div className="sheet-head">
+              <div className="sheet-title">Menu</div>
+              <button className="sheet-close" onClick={() => setMobileOpen(false)} aria-label="Close">
+                ✕
+              </button>
+            </div>
+
+            <div className="sheet-body">
+              {/* Primary (links thường) */}
+              <div className="group">
+                <div className="group-title">Browse</div>
+                <nav aria-label="Mobile Main">
+                  {(brandMain || []).filter(i => i.type !== 'menu').map(i => (
+                    <a key={i.href} className="m-item" href={i.href} onClick={() => setMobileOpen(false)}>
+                      <span className="cusc-ic link" aria-hidden="true"></span>
+                      <span>{i.content || i.label}</span>
+                    </a>
+                  ))}
+                </nav>
+              </div>
+
+              {/* Primary groups (dropdown) */}
+              {(brandMain || []).filter(i => i.type === 'menu').map(menu => (
+                <div key={menu.content} className="group">
+                  <div className="group-title">{menu.content}</div>
+                  {(menu.items || []).map(sub => (
+                    <a key={sub.href} className="m-item" href={sub.href} onClick={() => setMobileOpen(false)}>
+                      <span className="cusc-ic link" aria-hidden="true"></span>
+                      <span>{sub.content}</span>
+                    </a>
+                  ))}
+                </div>
               ))}
-            </ul>
-          </nav>
-          {brandMain.filter((i) => i.type === 'menu').map((menu) => (
-            <div key={menu.content} className="mt-2">
-              <div className="fw-semibold mb-1">{menu.content}</div>
-              <div className="d-flex" style={{ flexDirection: 'column', gap: 8 }}>
-                {(menu.items || []).map((sub) => (
-                  <a key={sub.href} href={sub.href} className="btn w-100 btn-light">{sub.content}</a>
-                ))}
+
+              {/* Secondary */}
+              {brandSecond.length > 0 && (
+                <div className="group">
+                  <div className="group-title">More</div>
+                  {brandSecond.map(i => (
+                    <a key={i.href} className="m-item" href={i.href} onClick={() => setMobileOpen(false)}>
+                      <span className="cusc-ic link" aria-hidden="true"></span>
+                      <span>{i.content || i.label}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* User/Auth */}
+              <div className="group" style={{marginTop: 12}}>
+                {authenticatedUser ? (
+                  <>
+                    {userMenu.map(i => (
+                      <a key={i.href} className="m-btn" href={i.href} onClick={() => setMobileOpen(false)}>{i.label}</a>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {loggedOut.map(i => (
+                      <a key={i.href} className="m-btn" href={i.href} onClick={() => setMobileOpen(false)}>{i.label}</a>
+                    ))}
+                  </>
+                )}
               </div>
             </div>
-          ))}
-          {brandSecond.length > 0 && (
-            <div className="mt-3">
-              <ul className="mobile-list">
-                {brandSecond.map((i) => (
-                  <li key={i.href}><a className="mobile-link" href={i.href}>{i.content || i.label}</a></li>
-                ))}
-              </ul>
-            </div>
-          )}
-          <div className="mt-3 d-flex" style={{ flexDirection: 'column', gap: 8 }}>
-            {authenticatedUser
-              ? userMenu.map((i) => <a key={i.href} href={i.href} className="btn w-100 btn-light">{i.label}</a>)
-              : loggedOut.map((i) => <a key={i.href} href={i.href} className="btn w-100 btn-light">{i.label}</a>)
-            }
-          </div>
-        </div>
+          </aside>
+        </>
       )}
     </header>
   );
