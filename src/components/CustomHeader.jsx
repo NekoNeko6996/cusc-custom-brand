@@ -233,7 +233,7 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo }) {
   function Desktop() {
     return (
       <header className="custom-header border-bottom bg-white">
-        <div className="container d-flex align-center justify-between" style={{ minHeight: 64 }}>
+        <div className="d-flex align-center justify-between" style={{ minHeight: 64 }}>
           <div className="d-flex align-center">
             {Brand}
             {!minimal && <MainMenu items={brandMain} />}
