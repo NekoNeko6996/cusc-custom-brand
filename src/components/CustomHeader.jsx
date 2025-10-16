@@ -4,6 +4,8 @@ import { useMediaQuery } from 'react-responsive';
 import { AppContext } from '@edx/frontend-platform/react/index.js';
 import { ensureConfig, getConfig } from '@edx/frontend-platform';
 
+import '../css/_header.css';
+import '../css/_variable.css';
 // Dữ liệu mặc định từ brand (có thể override bằng props)
 import {
   primaryNav as defaultPrimary,

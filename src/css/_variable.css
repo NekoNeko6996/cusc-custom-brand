@@ -1,0 +1,33 @@
+/* ========= CSS variable bridge (replaces former SCSS $variables) ========= */
+:root{
+  --light-dark:#475569;          /* $light-dark  */
+  --dark:#0f172a;                /* $dark        */
+  --primary:#0d6efd;             /* $primary     */
+  --primary-light:#e7f1ff;       /* $primary-light */
+
+  --body-bg-d:#0f1115;           /* $body-bg-d   */
+  --text-color-d:#e5e7eb;        /* $text-color-d */
+  --primary-d:#144aa3;           /* $primary-d   */
+  --btn-color-d:#ffffff;         /* $btn-color-d */
+  --light-overlay-d:#1b2433;     /* $light-overlay-d */
+  --text-color-primary:#c7d2fe;  /* $text-color-primary */
+
+  --dark-theme-switch-bg-color:#1f2937; /* $dark-theme-switch-bg-color */
+  --light-theme-switch-bg-color:#e5e7eb;/* $light-theme-switch-bg-color */
+
+  /* Tokens for header */
+  --cusc-blue:#0056A1;
+  --cusc-blue-hover:#0F59C9;
+  --accent:#10B981;
+  --accent-strong:#059669;
+  --line:#e5e7eb;
+  --txt:#1f2937;
+  --sub:#6b7280;
+  --h-pad-sm:8px;
+  --h-pad-md:12px;
+  --h-pad-lg:16px;
+  --ctrl-h:40px;
+  --ctrl-radius:10px;
+  --gap:12px;
+  --discover-gap:54px; /* unified spacing brand ↔ Discover */
+}
