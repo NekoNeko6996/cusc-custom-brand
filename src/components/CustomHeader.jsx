@@ -10,6 +10,11 @@ import {
   ctuLogo as defaultLogo,
 } from '../brand';
 
+// icon
+import ctuLogoPng from '../assets/ctu-logo.png';
+import cuscLogoPng from '../assets/cusc-logo.png';
+
+
 ensureConfig(
   ['LMS_BASE_URL','LOGIN_URL','LOGOUT_URL','SITE_NAME','ACCOUNT_PROFILE_URL','ACCOUNT_SETTINGS_URL','ORDER_HISTORY_URL'],
   'CustomHeader',
@@ -109,9 +114,14 @@ header.global-header.custom-header > .bar{
 }
 
 /* Brand */
-header.global-header.custom-header .brand{ display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; color:inherit; }
+header.global-header.custom-header .brand{ display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; color:inherit; margin-right:10px; }
 header.global-header.custom-header .brand-title{ font-weight:800; color:var(--cusc-blue); letter-spacing:.2px; }
 header.global-header.custom-header .brand:hover .brand-title{ color:var(--cusc-blue-hover); }
+
+/* NEW: khoảng cách giữa 2 logo */
+header.global-header.custom-header .brand .logo { display:block; height:28px; width:auto; }
+header.global-header.custom-header .brand .logo + .logo { margin-left: 10px; } /* “ít” khoảng cách giữa 2 logo */
+
 
 /* Main menu */
 header.global-header.custom-header .main-nav{ margin-left:var(--discover-gap) !important; }
@@ -320,6 +330,8 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
   const [userOpen, setUserOpen] = useState(false);
   const minimal = getConfig().AUTHN_MINIMAL_HEADER;
 
+
+
   const isDesktop = useMediaQuery({ minWidth: 992 });
   const isMobile = !isDesktop;
 
@@ -354,10 +366,24 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
 
   const Brand = (
     <a href={`${config?.LMS_BASE_URL}/dashboard`} className="brand d-inline-flex align-center">
-      <img src={config?.LOGO_URL || logo || defaultLogo} alt={config?.SITE_NAME || 'Site'} height={28}/>
+      {/* Hai logo đặt cạnh nhau */}
+      <img
+        src={cuscLogoPng}
+        alt="CUSC Logo"
+        height={28}
+        className="logo logo-cusc"
+      />
+      <img
+        src={ctuLogoPng}
+        alt="CTU Logo"
+        height={28}
+        className="logo logo-ctu"
+      />
+      {/* Tên brand */}
       <span className="brand-title">{config?.SITE_NAME || 'Site'}</span>
     </a>
   );
+
 
   function Secondary() {
     if (minimal || brandSecond.length === 0) return null;
