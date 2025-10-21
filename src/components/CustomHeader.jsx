@@ -6,10 +6,13 @@ import { ensureConfig, getConfig } from '@edx/frontend-platform';
 import {
   primaryNav as defaultPrimary,
   secondaryNav as defaultSecondary,
-  ctuLogo as ctuLogoPng,
-  cuscLogo as cuscLogoPng,
+  // ctuLogo as ctuLogoPng,
+  // cuscLogo as cuscLogoPng,
 } from '../brand';
 
+// 
+const ctuLogoPng = require('../assets/ctu-logo.png');
+const cuscLogoPng = require('../assets/cusc-logo.png');
 
 ensureConfig(
   ['LMS_BASE_URL','LOGIN_URL','LOGOUT_URL','SITE_NAME','ACCOUNT_PROFILE_URL','ACCOUNT_SETTINGS_URL','ORDER_HISTORY_URL'],
