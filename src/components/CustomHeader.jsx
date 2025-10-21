@@ -11,8 +11,8 @@ import {
 } from '../brand';
 
 // 
-const ctuLogoPng = require('../assets/ctu-logo.png');
-const cuscLogoPng = require('../assets/cusc-logo.png');
+const ctuLogoPng = "http://local.openedx.io:8000/static/tutor-edx-mytheme/images/ctu-logo.png";
+const cuscLogoPng = "http://local.openedx.io:8000/static/tutor-edx-mytheme/images/cusc-logo.png";
 
 ensureConfig(
   ['LMS_BASE_URL','LOGIN_URL','LOGOUT_URL','SITE_NAME','ACCOUNT_PROFILE_URL','ACCOUNT_SETTINGS_URL','ORDER_HISTORY_URL'],
