@@ -1,5 +1,3 @@
-import ctuLogo from '../assets/ctu-logo.png';
-
 export const primaryNav = [
   { href: '/courses', content: 'Courses' },
   {
@@ -15,5 +13,7 @@ export const primaryNav = [
 export const secondaryNav = [
   { href: '/help', content: 'Help' },
 ];
+import ctuLogo from '../assets/ctu-logo.png';
+import cuscLogo from '../assets/cusc-logo.png';
 
-export { ctuLogo };
+export { ctuLogo, cuscLogo };

@@ -3,16 +3,12 @@ import React, { useContext, useMemo, useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { AppContext } from '@edx/frontend-platform/react/index.js';
 import { ensureConfig, getConfig } from '@edx/frontend-platform';
-
 import {
   primaryNav as defaultPrimary,
   secondaryNav as defaultSecondary,
-  ctuLogo as defaultLogo,
+  ctuLogo as ctuLogoPng,
+  cuscLogo as cuscLogoPng,
 } from '../brand';
-
-// icon
-import ctuLogoPng from '../assets/ctu-logo.png';
-import cuscLogoPng from '../assets/cusc-logo.png';
 
 
 ensureConfig(
