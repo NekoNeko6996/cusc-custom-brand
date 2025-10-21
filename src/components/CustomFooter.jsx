@@ -1,12 +1,11 @@
 // src/components/CustomFooter.jsx
 import React from 'react';
-import tutorLogoDefault from '../assets/tutor-logo.png';
-import openedxLogoDefault from '../assets/openedx-logo.png';
+import { ctuLogo, cuscLogo } from '../brand';
 
 export default function CustomFooter({
   openedxLink,
-  tutorLogoSrc = tutorLogoDefault,
-  openedxLogoSrc = openedxLogoDefault,
+  firstLogo = ctuLogo,
+  secondLogo = cuscLogo,
   hideOpenedxLink,
   bidi,
   includeLanguageSelector,
@@ -33,12 +32,12 @@ export default function CustomFooter({
                 <li><strong>Powered by:</strong></li>
                 <li>
                   <a href="https://docs.tutor.edly.io" rel="noopener" target="_blank">
-                    <img src={tutorLogoSrc} alt="Runs on Tutor" width="80" />
+                    <img src={firstLogo} alt="Runs on Tutor" width="80" />
                   </a>
                 </li>
                 <li>
                   <a href={openedxLink.url} rel="noopener" target="_blank">
-                    <img src={openedxLogoSrc} alt={openedxLink.title} width="79" />
+                    <img src={secondLogo} alt={openedxLink.title} width="79" />
                   </a>
                 </li>
               </ul>
