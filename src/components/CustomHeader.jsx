@@ -56,8 +56,8 @@ const THEME_CSS_VARS = `
 `;
 
 /* =========================
-   CUSC Header (lean & same UI)
-   ========================= */
+    CUSC Header (lean & same UI)
+    ========================= */
 const HEADER_CSS = `
 /* Ẩn header legacy của edX nếu còn trong DOM (để tránh đè UI) */
 header.global-header:not(.custom-header){ display:none !important; }
@@ -254,7 +254,7 @@ function InlineIcon({ name, size = 20 }) {
 }
 function classNames(...xs) { return xs.filter(Boolean).join(' '); }
 
-function AvatarOrIcon({ src, size = 28, alt = 'User avatar' }) {
+function AvatarOrIcon({ src, size = 28, alt = 'Ảnh đại diện người dùng' }) {
   const [err, setErr] = React.useState(false);
   const showImg = !!src && !err;
 
@@ -276,7 +276,7 @@ function AvatarOrIcon({ src, size = 28, alt = 'User avatar' }) {
 function MainMenu({ items }) {
   const [openKey, setOpenKey] = useState(null);
   return (
-    <nav className="main-nav" aria-label="Main">
+    <nav className="main-nav" aria-label="Menu chính">
       <ul className="nav-list">
         {items.map((item) => {
           if (item.type === 'menu' && Array.isArray(item.items)) {
@@ -319,7 +319,7 @@ function MainMenu({ items }) {
   );
 }
 
-export default function CustomHeader({ primaryNav, secondaryNav, logo, userImageUrl }) {
+export default function CustomHeader({ primaryNav, secondaryNav, logo, userImageUrl, showLoginButtons = true }) {
   const { authenticatedUser, config } = useContext(AppContext);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
@@ -334,8 +334,8 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
   const brandSecond = useMemo(() => secondaryNav ?? defaultSecondary ?? [], [secondaryNav]);
 
   const loggedOut = useMemo(() => ([
-    { href: config?.LOGIN_URL, label: 'Log in' },
-    { href: `${config?.LMS_BASE_URL}/register`, label: 'Register' },
+    { href: config?.LOGIN_URL, label: 'Đăng Nhập' },  
+    { href: `${config?.LMS_BASE_URL}/register`, label: 'Đăng Ký' },
   ]), [config]);
 
   useEffect(() => {
@@ -351,11 +351,11 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
   const userMenu = useMemo(() => {
     if (!authenticatedUser) return [];
     return [
-      { href: `${config.LMS_BASE_URL}/dashboard`, label: 'Dashboard' },
-      { href: `${config.ACCOUNT_PROFILE_URL}/u/${authenticatedUser.username}`, label: 'Profile' },
-      ...(config.ORDER_HISTORY_URL ? [{ href: config.ORDER_HISTORY_URL, label: 'Order history' }] : []),
-      { href: config.ACCOUNT_SETTINGS_URL, label: 'Account settings' },
-      { href: config.LOGOUT_URL, label: 'Log out' },
+      { href: `${config.LMS_BASE_URL}/dashboard`, label: 'Bảng điều khiển' },
+      { href: `${config.ACCOUNT_PROFILE_URL}/u/${authenticatedUser.username}`, label: 'Hồ sơ' },
+      ...(config.ORDER_HISTORY_URL ? [{ href: config.ORDER_HISTORY_URL, label: 'Lịch sử đơn hàng' }] : []),
+      { href: config.ACCOUNT_SETTINGS_URL, label: 'Cài đặt tài khoản' },
+      { href: config.LOGOUT_URL, label: 'Đăng xuất' },
     ];
   }, [authenticatedUser, config]);
 
@@ -375,7 +375,7 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
         className="logo logo-ctu"
       />
       {/* Tên brand */}
-      <span className="brand-title">{config?.SITE_NAME || 'Site'}</span>
+      <span className="brand-title">{config?.SITE_NAME || 'Trang'}</span>
     </a>
   );
 
@@ -383,7 +383,7 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
   function Secondary() {
     if (minimal || brandSecond.length === 0) return null;
     return (
-      <nav className="secondary-nav" aria-label="Secondary">
+      <nav className="secondary-nav" aria-label="Menu phụ">
         <ul className="nav-list">
           {brandSecond.map((item) => (
             <li key={item.href} className="nav-item">
@@ -406,7 +406,7 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
         authenticatedUser?.profileImageUrl ||
         authenticatedUser?.image_url;
 
-      const displayName = authenticatedUser?.name || authenticatedUser?.username || 'User';
+      const displayName = authenticatedUser?.name || authenticatedUser?.username || 'Người dùng';
       return (
         <div className="user-area">
           <button
@@ -456,7 +456,7 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
         </div>
         <div className="d-flex align-center" style={{ gap: '12px' }}>
           <Secondary />
-          <UserArea />
+          {showLoginButtons && <UserArea />}
         </div>
       </div>
     </header>
@@ -470,7 +470,7 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
           <button
             type="button"
             className="btn-reset p-2"
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-label={mobileOpen ? 'Đóng menu' : 'Mở menu'}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen(v => !v)}
           >
@@ -484,10 +484,10 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
         <>
           <div className="cusc-mobile-overlay" onClick={() => setMobileOpen(false)} />
 
-          <aside className="cusc-mobile-sheet" role="dialog" aria-modal="true" aria-label="Main menu">
+          <aside className="cusc-mobile-sheet" role="dialog" aria-modal="true" aria-label="Menu chính">
             <div className="sheet-head">
               <div className="sheet-title">Menu</div>
-              <button className="sheet-close" onClick={() => setMobileOpen(false)} aria-label="Close">
+              <button className="sheet-close" onClick={() => setMobileOpen(false)} aria-label="Đóng">
                 ✕
               </button>
             </div>
@@ -495,8 +495,8 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
             <div className="sheet-body">
               {/* Primary (links thường) */}
               <div className="group">
-                <div className="group-title">Browse</div>
-                <nav aria-label="Mobile Main">
+                <div className="group-title">Duyệt xem</div>
+                <nav aria-label="Menu chính (di động)">
                   {(brandMain || []).filter(i => i.type !== 'menu').map(i => (
                     <a key={i.href} className="m-item" href={i.href} onClick={() => setMobileOpen(false)}>
                       <span className="cusc-ic link" aria-hidden="true"></span>
@@ -522,7 +522,7 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
               {/* Secondary */}
               {brandSecond.length > 0 && (
                 <div className="group">
-                  <div className="group-title">More</div>
+                  <div className="group-title">Khác</div>
                   {brandSecond.map(i => (
                     <a key={i.href} className="m-item" href={i.href} onClick={() => setMobileOpen(false)}>
                       <span className="cusc-ic link" aria-hidden="true"></span>

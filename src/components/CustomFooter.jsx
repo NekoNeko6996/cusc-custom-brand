@@ -29,10 +29,10 @@ export default function CustomFooter({
           <div className="powered-area" style={{ marginBottom: 16 }}>
             {!hideOpenedxLink && (
               <ul className="logo-list" style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', gap: 12, alignItems: 'center' }}>
-                <li><strong>Powered by:</strong></li>
+                <li><strong>Được cung cấp bởi:</strong></li>
                 <li>
                   <a href="https://docs.tutor.edly.io" rel="noopener" target="_blank">
-                    <img src={firstLogo} alt="Runs on Tutor" width="80" />
+                    <img src={firstLogo} alt="Chạy trên Tutor" width="80" />
                   </a>
                 </li>
                 <li>
@@ -55,12 +55,12 @@ export default function CustomFooter({
             }}
           >
             <div className="footer-col">
-              <h4 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>About CUSC</h4>
+              <h4 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Về CUSC</h4>
               <p dangerouslySetInnerHTML={{ __html: aboutHtml }} />
             </div>
 
             <div className="footer-col">
-              <h4 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Quick Links</h4>
+              <h4 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Liên kết nhanh</h4>
               {quickLinks.map((l) => (
                 <a key={l.href} href={l.href} style={{ display: 'block', margin: '.35rem 0', textDecoration: 'none', color: '#c0c9dc' }}>
                   {l.label}
@@ -69,7 +69,7 @@ export default function CustomFooter({
             </div>
 
             <div className="footer-col">
-              <h4 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Contact</h4>
+              <h4 style={{ margin: '0 0 1rem 0', color: '#ffffff' }}>Liên hệ</h4>
               {contactLines.map((line, i) => (
                 <p key={i} style={{ margin: '.35rem 0', color: '#aab3c5', lineHeight: 1.6 }}>{line}</p>
               ))}
@@ -78,15 +78,15 @@ export default function CustomFooter({
         </div>
 
         <span className="copyright-site" style={{ display: 'block', marginTop: 16 }}>
-          Copyrights ©{year}. All Rights Reserved.
+          Bản quyền ©{year}. Bảo lưu mọi quyền.
         </span>
 
         <div className="colophon" style={{ marginTop: '1rem', borderTop: '1px solid rgba(255,255,255,.08)', paddingTop: '1rem', textAlign: 'center' }}>
           {includeLanguageSelector && (
-            <p style={{ opacity: 0.8, marginBottom: 8 }}>Language: English</p>
+            <p style={{ opacity: 0.8, marginBottom: 8 }}>Ngôn ngữ: Tiếng Anh</p> // Lưu ý: Văn bản này nên được quốc tế hóa động
           )}
           <p className="copyright" style={{ color: '#aab3c5', fontSize: '0.875rem', margin: 0, padding: '10px' }}>
-            © {year} CUSC Learning Platform
+            © {year} Nền tảng học tập CUSC
             {icp?.icp_license ? (
               <>
                 {' '}| {icp.text}{' '}
@@ -101,22 +101,22 @@ export default function CustomFooter({
 }
 
 CustomFooter.defaultProps = {
-  openedxLink: { url: 'https://openedx.org', title: 'Open edX' },
+  openedxLink: { url: 'https://openedx.org', title: 'Open edX' }, // 'Open edX' là tên thương hiệu, không dịch
   hideOpenedxLink: false,
   bidi: undefined,
   includeLanguageSelector: false,
   icp: undefined,
   aboutHtml:
-    'The Can Tho University Software Center provides online learning solutions and professional courses in programming, data science, and design.',
+    'Trung tâm Phần mềm Đại học Cần Thơ cung cấp các giải pháp học tập trực tuyến và các khóa học chuyên nghiệp về lập trình, khoa học dữ liệu và thiết kế.',
   quickLinks: [
-    { href: '/courses', label: 'Courses' },
-    { href: '/about', label: 'About' },
-    { href: '/tos', label: 'Terms' },
-    { href: '/privacy', label: 'Privacy' },
+    { href: '/courses', label: 'Các khóa học' },
+    { href: '/about', label: 'Giới thiệu' },
+    { href: '/tos', label: 'Điều khoản' },
+    { href: '/privacy', label: 'Bảo mật' },
   ],
   contactLines: [
-    'Email: info@cusc.vn',
-    'Phone: +84 292 3835 579',
-    'Address: 1 Ly Tu Trong St, Ninh Kieu, Can Tho, Vietnam',
+    'Thư điện tử: info@cusc.vn',
+    'Điện thoại: +84 292 3835 579',
+    'Địa chỉ: 01 Lý Tự Trọng, P. An Phú, Q. Ninh Kiều, TP. Cần Thơ, Việt Nam',
   ],
 };
