@@ -319,7 +319,14 @@ function MainMenu({ items }) {
   );
 }
 
-export default function CustomHeader({ primaryNav, secondaryNav, logo, userImageUrl, showLoginButtons = true }) {
+export default function CustomHeader({ 
+  primaryNav, 
+  secondaryNav, 
+  firstLogo = cuscLogo, 
+  secondLogo = ctuLogo, 
+  userImageUrl, 
+  showLoginButtons = true 
+}) {
   const { authenticatedUser, config } = useContext(AppContext);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
@@ -361,20 +368,18 @@ export default function CustomHeader({ primaryNav, secondaryNav, logo, userImage
 
   const Brand = (
     <a href={`${config?.LMS_BASE_URL}/dashboard`} className="brand d-inline-flex align-center">
-      {/* Hai logo đặt cạnh nhau */}
       <img
-        src={cuscLogoPng}
+        src={firstLogo}
         alt="CUSC Logo"
         height={28}
         className="logo logo-cusc"
       />
       <img
-        src={ctuLogoPng}
+        src={secondLogo}
         alt="CTU Logo"
         height={28}
         className="logo logo-ctu"
       />
-      {/* Tên brand */}
       <span className="brand-title">{config?.SITE_NAME || 'Trang'}</span>
     </a>
   );
