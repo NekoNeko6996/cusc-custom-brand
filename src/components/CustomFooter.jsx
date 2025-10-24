@@ -3,9 +3,10 @@ import React from 'react';
 import { ctuLogo, cuscLogo } from '../brand';
 
 export default function CustomFooter({
-  openedxLink,
   firstLogo = ctuLogo,
+  firstLogoRedirectURL,
   secondLogo = cuscLogo,
+  secondLogoRedirectURL,
   hideOpenedxLink,
   bidi,
   includeLanguageSelector,
@@ -31,13 +32,13 @@ export default function CustomFooter({
               <ul className="logo-list" style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', gap: 12, alignItems: 'center' }}>
                 <li><strong>Được cung cấp bởi:</strong></li>
                 <li>
-                  <a href="https://docs.tutor.edly.io" rel="noopener" target="_blank">
-                    <img src={firstLogo} alt="Chạy trên Tutor" width="80" />
+                  <a href={firstLogoRedirectURL} rel="noopener" target="_blank">
+                    <img src={firstLogo} width="80" />
                   </a>
                 </li>
                 <li>
-                  <a href={openedxLink.url} rel="noopener" target="_blank">
-                    <img src={secondLogo} alt={openedxLink.title} width="79" />
+                  <a href={secondLogoRedirectURL} rel="noopener" target="_blank">
+                    <img src={secondLogo} width="79" />
                   </a>
                 </li>
               </ul>
@@ -101,7 +102,6 @@ export default function CustomFooter({
 }
 
 CustomFooter.defaultProps = {
-  openedxLink: { url: 'https://openedx.org', title: 'Open edX' }, // 'Open edX' là tên thương hiệu, không dịch
   hideOpenedxLink: false,
   bidi: undefined,
   includeLanguageSelector: false,
