@@ -26,7 +26,7 @@
     "@openedx/paragon": ">=20",
     "react": ">=17 <19",
     "react-dom": ">=17 <19",
-    "react-responsive": "^9"
+    "react-responsive": "^8 || ^9"
   },
   "devDependencies": {
     "tsup": "^8.5.0"
