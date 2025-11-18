@@ -325,7 +325,8 @@ export default function CustomHeader({
   firstLogo = cuscLogo, 
   secondLogo = ctuLogo, 
   userImageUrl, 
-  showLoginButtons = true 
+  showLoginButtons = true,
+  twoLogo = false,
 }) {
   const { authenticatedUser, config } = useContext(AppContext);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -384,6 +385,17 @@ export default function CustomHeader({
     </a>
   );
 
+  const OneLogoBrand = (
+    <a href={`${config?.LMS_BASE_URL}/dashboard`} className="brand d-inline-flex align-center">
+      <img
+        src={`${config?.LMS_BASE_URL}/static/tutor-edx-mytheme/images/logo.png`}
+        alt="Web Logo"
+        height={28}
+        className="logo"
+      />
+      <span className="brand-title">{config?.SITE_NAME || 'Trang'}</span>
+    </a>
+  );
 
   function Secondary() {
     if (minimal || brandSecond.length === 0) return null;
@@ -456,7 +468,7 @@ export default function CustomHeader({
     <header className="custom-header global-header">
       <div className="bar">
         <div className="d-flex align-center">
-          {Brand}
+          {twoLogo? <Brand /> : <OneLogoBrand />}
           {!minimal && <MainMenu items={brandMain} />}
         </div>
         <div className="d-flex align-center" style={{ gap: '12px' }}>
@@ -470,7 +482,7 @@ export default function CustomHeader({
   const Mobile = () => (
     <header className="custom-header global-header">
       <div className="bar d-flex align-center justify-between">
-        {Brand}
+        {twoLogo? <Brand /> : <OneLogoBrand />}
         {!minimal && (
           <button
             type="button"
